@@ -1,0 +1,132 @@
+﻿@model IEnumerable<UserAuthenticationTask.Models.User>
+
+ <div>
+    <h1 class="m-auto">InActive Accounts</h1>
+    @if (Model.Any(user=>user.IsActive==false))
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (!item.IsActive)
+                    {
+                        <tr>
+                            <td>
+                                @item.UserId
+                            </td>
+                            <td>
+                                @item.UserName
+                            </td>
+                            <td>
+                                @item.Password
+                            </td>
+                            <td>
+                                @item.IsActive
+                            </td>
+                            <td>
+                                @item.CreatedAt
+                            </td>
+                            <td>
+                                <a asp-controller="Users" asp-action="ChangeUserActivity" asp-route-id="@item.UserId" class="btn btn-success">Active</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    }else
+    {
+        <div class="alert alert-warning">There Are No InActive Users Yet!</div>
+    }
+
+
+ </div>
+
+ <div class="mt-4">
+    <h1 class="m-auto">Active Accounts</h1>
+    @if (Model.Any(user=>user.IsActive==true))
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.IsActive)
+                    {
+                        <tr>
+                            <td>
+                                @item.UserId
+                            </td>
+                            <td>
+                                @item.UserName
+                            </td>
+                            <td>
+                                @item.Password
+                            </td>
+                            <td>
+                                @item.IsActive
+                            </td>
+                            <td>
+                                @item.CreatedAt
+                            </td>
+                            <td>
+                                <a asp-controller="Users" asp-action="ChangeUserActivity" asp-route-id="@item.UserId" class="btn btn-danger">InActive</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning">There Are No Active Users Yet!</div>
+    }
+ </div>
+
+
